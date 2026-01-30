@@ -13,11 +13,11 @@ A comprehensive, production-ready Nextflow pipeline for ChIP-seq (Chromatin Immu
 This pipelie automates the complete CHIP-seq analysis workflow. It processes raw sequencing reads through quality control, alignment, peak calling and annotation.
 
 # Key Features
-  **Automated Quality Control:**  FastQC + MultiQC reports 
-  **Flexible Execution:** Docker, Singularity, Conda, or native installation
-  **HPC Compatible:** SLURM and local execution
-  **Reproducible:** Containerized tools with version control
-  **Production Ready:** Error handling, retry logic, and detailed logging
+  **Automated Quality Control:**  FastQC + MultiQC reports \
+  **Flexible Execution:** Docker, Singularity, Conda, or native installation \
+  **HPC Compatible:** SLURM and local execution \
+  **Reproducible:** Containerized tools with version control \
+  **Production Ready:** Error handling, retry logic, and detailed logging \
   **Comprehensive Output:** BAM files, peaks, bigWigs, and annotations
 
   # What is ChIP-seq?
