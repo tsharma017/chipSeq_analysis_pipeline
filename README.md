@@ -139,3 +139,47 @@ RESULTS: Peaks, Annotations, QC Reports
  **Why:** Provides overview of entire experiment quality
  **Output:** HTML report with all metrics
 
+ # Installation
+
+ *Prerequisites*
+ - *Nextflow* (≥ 21.10.0)
+ - *Java* (≥ 8)
+ - One of: *Docker*, *Singularity*, or *Conda*
+
+   
+   *Install Nextflow*
+   
+```
+# Download Nextflow
+curl -s https://get.nextflow.io | bash
+
+# Make it executable
+chmod +x nextflow
+
+# Move to a location in your PATH
+sudo mv nextflow /usr/local/bin/
+
+# Test installation
+nextflow -version
+
+```
+*Clone This Repository*
+
+```
+git clone https://github.com/yourusername/chipseq-pipeline.git
+cd chipseq-pipeline
+
+```
+
+*Quick Start*
+Create a CSV file (samplesheet.csv) with your samples(single end or pair end):
+
+```
+chip_sample,chip_fastq_r1,chip_fastq_r2,input_sample,input_fastq_r1,input_fastq_r2
+MOLM-14_DMS01_5_BRD4,data/fastq/MOLM-14_DMS01_5_BRD4.fastq.gz,,MOLM-14_DMS01_5_Input,data/fastq/MOLM-14_DMS01_5_Input.fastq.gz,
+MOLM-14_DMS02_6_BRD4,data/fastq/MOLM-14_DMS02_6_BRD4.fastq.gz,,MOLM-14_DMS02_6_Input,data/fastq/MOLM-14_DMS02_6_Input.fastq.gz,
+
+```
+
+
+
