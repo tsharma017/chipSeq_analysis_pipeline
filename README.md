@@ -2,17 +2,17 @@
 
 A comprehensive, production-ready Nextflow pipeline for ChIP-seq (Chromatin Immunoprecipitation Sequencing) data analysis - from raw FASTQ (suitable for both singel read and pari read) files to annotated peaks and quality reports.
 
-# Table of Contents
+## Table of Contents
 - <ins>Overview<ins>
 - <ins>What is Chip-seq?<ins>
 - <ins>Pipeline Workflow<ins>
 - <ins>Installation<ins>
 
 
-# Overview
+## Overview
 This pipelie automates the complete CHIP-seq analysis workflow. It processes raw sequencing reads through quality control, alignment, peak calling and annotation.
 
-# Key Features
+## Key Features
   **Automated Quality Control:**  FastQC + MultiQC reports \
   **Flexible Execution:** Docker, Singularity, Conda, or native installation \
   **HPC Compatible:** SLURM and local execution \
@@ -20,7 +20,7 @@ This pipelie automates the complete CHIP-seq analysis workflow. It processes raw
   **Production Ready:** Error handling, retry logic, and detailed logging \
   **Comprehensive Output:** BAM files, peaks, bigWigs, and annotations
 
-  # What is ChIP-seq?
+  ## What is ChIP-seq?
   **ChIP-seq (Chromatin Immunoprecipitation Sequencing)** is a technique used to identify where proteins (like transcription factor or histones) bind to DNA across the entire genome.
 
   **The Biology**
@@ -30,13 +30,13 @@ This pipelie automates the complete CHIP-seq analysis workflow. It processes raw
   4. **Sequence:** The captured DNA fragements are sequenced
   5. **Analyze:** Computational analysis  identifies enriched regions (peaks)
 
-# What you Get
+## What you Get
 - **Binding Sites:** Where protein binds in the genome
 - **Peak Regions:** Genomic coordinates of enriched areas
 - **Gene Associations:** Which genes are near binding sites
 - **Motifs:** DNA sequence patterns at binding sites
 
-  # Pipeline Workflow
+  ## Pipeline Workflow
 ```
   RAW FASTQ FILES
       ↓
@@ -84,7 +84,7 @@ RESULTS: Peaks, Annotations, QC Reports
 
 ```
 
-# Detailed Steps Explanations
+## Detailed Steps Explanations
 
 **Step 1: Quality Control (FastQC)**
  **What:** Checks the quality of your raw sequencing data
