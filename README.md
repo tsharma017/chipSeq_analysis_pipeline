@@ -141,13 +141,13 @@ RESULTS: Peaks, Annotations, QC Reports
 
  # Installation
 
- *Prerequisites*
+ ### Prerequisites
  - *Nextflow* (≥ 21.10.0)
  - *Java* (≥ 8)
  - One of: *Docker*, *Singularity*, or *Conda*
 
    
-   *Install Nextflow*
+   ### Install Nextflow
    
 ```
 # Download Nextflow
@@ -163,7 +163,7 @@ sudo mv nextflow /usr/local/bin/
 nextflow -version
 
 ```
-*Clone This Repository*
+### Clone This Repository
 
 ```
 git clone https://github.com/yourusername/chipseq-pipeline.git
@@ -171,8 +171,8 @@ cd chipseq-pipeline
 
 ```
 
-*Quick Start*
-Create a CSV file (samplesheet.csv) with your samples(single end or pair end):
+### *Quick Start*
+Create a CSV file (samples.csv) with your samples(single end or pair end):
 
 ```
 chip_sample,chip_fastq_r1,chip_fastq_r2,input_sample,input_fastq_r1,input_fastq_r2
@@ -180,6 +180,134 @@ MOLM-14_DMS01_5_BRD4,data/fastq/MOLM-14_DMS01_5_BRD4.fastq.gz,,MOLM-14_DMS01_5_I
 MOLM-14_DMS02_6_BRD4,data/fastq/MOLM-14_DMS02_6_BRD4.fastq.gz,,MOLM-14_DMS02_6_Input,data/fastq/MOLM-14_DMS02_6_Input.fastq.gz,
 
 ```
+**Column Descriptions:**
+chip_sample: Unique name for your ChIP sample
+chip_fastq_r1: Path to R1 FASTQ file (required)
+chip_fastq_r2: Path to R2 FASTQ file (leave empty for single-end)
+input_sample: Name for the matched Input/Control sample
+input_fastq_r1: Path to Input R1 FASTQ
+input_fastq_r2: Path to Input R2 FASTQ (leave empty for single-end)
+
+### Download Refrence Genome
+```
+mkdir -p genome
+
+# Download human genome (hg38)
+wget -O genome/hg38.fa.gz http://hgdownload.soe.ucsc.edu/goldenPath/hg38/bigZips/hg38.fa.gz
+gunzip genome/hg38.fa.gz
+
+```
+# Run the pipeline
+## With Docker
+```
+nextflow run main.nf \
+  --input samples.csv \
+  --genome hg38 \
+  --genome_fasta genome/hg38.fa \
+  --outdir results \
+  -profile docker`
+
+```
+## With Singularity (for HPC)
+
+```
+nextflow run main.nf \
+  --input samples.csv \
+  --genome hg38 \
+  --genome_fasta genome/hg38.fa \
+  --outdir results \
+  -profile singularity
+
+```
+# Detaild Usage
+Currently supported genomes: hg38 - Human (GRCh38), hg19 - Human (GRCh37), mm10 - Mouse (GRCm38), mm9 - Mouse (GRCm37)
+
+# Peak Calling Options
+## For Transcription Factors *(narrow peaks):*
+```
+nextflow run main.nf --input samples.csv --broad_peaks false
+
+```
+## For Histone Marks *(braod peaks):*
+```
+nextflow run main.nf --input samples.csv --broad_peaks true
+
+```
+
+# Advance Parameters
+```
+nextflow run main.nf \
+  --input samples.csv \
+  --genome hg38 \
+  --genome_fasta genome/hg38.fa \
+  --outdir results \
+  --macs_qvalue 0.01 \              # Stricter peak calling (default: 0.05)
+  --broad_peaks true \               # For histone marks
+  --skip_fastqc false \              # Include FastQC
+  --skip_trimming false \            # Include trimming
+  -profile singularity \
+  -resume                            # Resume from last successful step
+
+```
+
+# Output Files
+The pipeline creates the following directory structure:
+
+```
+results/
+├── 01_fastqc/                    # Raw read quality reports
+│   ├── sample1_R1_fastqc.html
+│   └── sample1_R1_fastqc.zip
+│
+├── 02_trimmed/                   # Trimmed reads
+│   ├── sample1_trimmed.fq.gz
+│   └── sample1_trimming_report.txt
+│
+├── 03_alignment/                 # Aligned reads
+│   ├── sample1.sorted.bam
+│   ├── sample1.sorted.bam.bai
+│   └── sample1.flagstat.txt
+│
+├── 04_dedup/                     # Deduplicated reads
+│   ├── sample1.dedup.bam
+│   ├── sample1.dedup.bam.bai
+│   ├── sample1.dup_metrics.txt
+│   └── sample1.dedup.flagstat.txt
+│
+├── 05_qc/                        # ChIP-seq quality metrics
+│   ├── sample1.spp.out
+│   └── sample1.spp.pdf
+│
+├── 06_bigwig/                    # Genome browser tracks
+│   └── sample1.bw
+│
+├── 07_peaks/                     # Called peaks
+│   ├── sample1_peaks.narrowPeak
+│   ├── sample1_peaks.xls
+│   ├── sample1_summits.bed
+│   └── sample1_model.r
+│
+├── 08_annotation/                # Annotated peaks
+│   └── sample1.annotated.txt
+│
+├── 09_multiqc/                   # Summary report
+│   ├── multiqc_report.html
+│   └── multiqc_data/
+│
+└── pipeline_info/                # Pipeline execution info
+    ├── timeline.html
+    ├── report.html
+    ├── trace.txt
+    └── dag.svg
+
+```
+
+
+
+
+
+
+
 
 
 
