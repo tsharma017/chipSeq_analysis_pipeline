@@ -181,11 +181,11 @@ MOLM-14_DMS02_6_BRD4,data/fastq/MOLM-14_DMS02_6_BRD4.fastq.gz,,MOLM-14_DMS02_6_I
 
 ```
 **Column Descriptions:**
-chip_sample: Unique name for your ChIP sample
-chip_fastq_r1: Path to R1 FASTQ file (required)
-chip_fastq_r2: Path to R2 FASTQ file (leave empty for single-end)
-input_sample: Name for the matched Input/Control sample
-input_fastq_r1: Path to Input R1 FASTQ
+chip_sample: Unique name for your ChIP sample\
+chip_fastq_r1: Path to R1 FASTQ file (required)\
+chip_fastq_r2: Path to R2 FASTQ file (leave empty for single-end)\
+input_sample: Name for the matched Input/Control sample\
+input_fastq_r1: Path to Input R1 FASTQ\
 input_fastq_r2: Path to Input R2 FASTQ (leave empty for single-end)
 
 ### Download Refrence Genome
