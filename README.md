@@ -13,5 +13,5 @@ A comprehensive, production-ready Nextflow pipeline for ChIP-seq (Chromatin Immu
 This pipelie automates the complete CHIP-seq analysis workflow. It processes raw sequencing reads through quality control, alignment, peak calling and annotation.
 
 # Key Features
-  ## Automated Quality Control: 
+  *Automated Quality Control:*  FastQC + MultiQC reports 
 
