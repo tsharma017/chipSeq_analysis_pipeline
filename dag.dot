@@ -1,0 +1,235 @@
+digraph "dag" {
+rankdir=TB;
+v0 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+v1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="splitCsv"];
+v0 -> v1;
+
+v1 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="splitCsv"];
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v1 -> v2;
+
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v3 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="flatMap"];
+v2 -> v3 [label="samples_ch"];
+
+v3 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="flatMap"];
+v4 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="unique"];
+v3 -> v4;
+
+v4 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="unique"];
+v5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v4 -> v5;
+
+v5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v7 [label="FASTQC"];
+v5 -> v7 [label="all_samples_ch"];
+
+v6 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.fromPath"];
+v9 [label="BWA_INDEX"];
+v6 -> v9 [label="genome_ch"];
+
+v7 [label="FASTQC"];
+v33 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v7 -> v33;
+
+v5 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v8 [label="TRIM_GALORE"];
+v5 -> v8 [label="all_samples_ch"];
+
+v8 [label="TRIM_GALORE"];
+v11 [label="BWA_ALIGN"];
+v8 -> v11 [label="reads_for_alignment"];
+
+v8 [label="TRIM_GALORE"];
+v35 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v8 -> v35;
+
+v9 [label="BWA_INDEX"];
+v10 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v9 -> v10;
+
+v10 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v11 [label="BWA_ALIGN"];
+v10 -> v11;
+
+v11 [label="BWA_ALIGN"];
+v12 [label="MARK_DUPLICATES"];
+v11 -> v12;
+
+v11 [label="BWA_ALIGN"];
+v37 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v11 -> v37;
+
+v12 [label="MARK_DUPLICATES"];
+v13 [label="PHANTOMPEAKQUALTOOLS"];
+v12 -> v13;
+
+v12 [label="MARK_DUPLICATES"];
+v39 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v12 -> v39;
+
+v12 [label="MARK_DUPLICATES"];
+v41 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v12 -> v41;
+
+v13 [label="PHANTOMPEAKQUALTOOLS"];
+v15 [label="EXTRACT_FRAGMENT_LENGTH"];
+v13 -> v15;
+
+v13 [label="PHANTOMPEAKQUALTOOLS"];
+v14 [shape=point];
+v13 -> v14;
+
+v15 [label="EXTRACT_FRAGMENT_LENGTH"];
+v16 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="join"];
+v15 -> v16;
+
+v12 [label="MARK_DUPLICATES"];
+v16 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="join"];
+v12 -> v16;
+
+v16 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="join"];
+v17 [label="CREATE_BIGWIG"];
+v16 -> v17 [label="bam_with_fraglen"];
+
+v17 [label="CREATE_BIGWIG"];
+v18 [shape=point];
+v17 -> v18;
+
+v2 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v19 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v2 -> v19 [label="samples_ch"];
+
+v19 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v20 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v19 -> v20;
+
+v12 [label="MARK_DUPLICATES"];
+v20 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v12 -> v20;
+
+v20 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v21 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v20 -> v21;
+
+v21 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v21 -> v22;
+
+v12 [label="MARK_DUPLICATES"];
+v22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v12 -> v22;
+
+v22 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v23 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v22 -> v23;
+
+v23 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v24 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v23 -> v24;
+
+v15 [label="EXTRACT_FRAGMENT_LENGTH"];
+v24 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v15 -> v24;
+
+v24 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="combine"];
+v25 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v24 -> v25;
+
+v25 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="map"];
+v26 [label="MACS2_CALLPEAK"];
+v25 -> v26 [label="peak_calling_input"];
+
+v26 [label="MACS2_CALLPEAK"];
+v30 [label="ANNOTATE_PEAKS"];
+v26 -> v30;
+
+v26 [label="MACS2_CALLPEAK"];
+v29 [shape=point];
+v26 -> v29;
+
+v26 [label="MACS2_CALLPEAK"];
+v28 [shape=point];
+v26 -> v28;
+
+v26 [label="MACS2_CALLPEAK"];
+v27 [shape=point];
+v26 -> v27;
+
+v30 [label="ANNOTATE_PEAKS"];
+v31 [shape=point];
+v30 -> v31;
+
+v32 [shape=point,label="",fixedsize=true,width=0.1,xlabel="Channel.empty"];
+v45 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v32 -> v45;
+
+v33 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v34 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v33 -> v34;
+
+v34 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v45 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v34 -> v45;
+
+v35 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v36 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v35 -> v36;
+
+v36 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v45 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v36 -> v45;
+
+v37 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v38 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v37 -> v38;
+
+v38 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v45 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v38 -> v45;
+
+v39 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v40 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v39 -> v40;
+
+v40 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v45 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v40 -> v45;
+
+v41 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v42 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v41 -> v42;
+
+v42 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v45 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v42 -> v45;
+
+v13 [label="PHANTOMPEAKQUALTOOLS"];
+v43 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v13 -> v43;
+
+v43 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v44 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v43 -> v44;
+
+v44 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="ifEmpty"];
+v45 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v44 -> v45;
+
+v45 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="mix"];
+v46 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v45 -> v46 [label="qc_files"];
+
+v46 [shape=circle,label="",fixedsize=true,width=0.1,xlabel="collect"];
+v47 [label="MULTIQC"];
+v46 -> v47;
+
+v47 [label="MULTIQC"];
+v49 [shape=point];
+v47 -> v49;
+
+v47 [label="MULTIQC"];
+v48 [shape=point];
+v47 -> v48;
+
+}
