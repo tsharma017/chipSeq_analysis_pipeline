@@ -1,6 +1,6 @@
 # CHIP-seq-analysis-Pipeline
 
-A comprehensive, production-ready Nextflow pipeline for ChIP-seq (Chromatin Immunoprecipitation Sequencing) data analysis - from raw FASTQ (suitable for both single read and pari read) files to annotated peaks and quality reports.
+A comprehensive, production-ready Nextflow pipeline for ChIP-seq (Chromatin Immunoprecipitation Sequencing) data analysis - from raw FASTQ (suitable for both single read and pair read) files to annotated peaks and quality reports.
 
 ## Table of Contents
 - <ins>Overview<ins>
